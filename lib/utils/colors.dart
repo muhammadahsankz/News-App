@@ -7,6 +7,7 @@ class AppColors {
   static Color black = Colors.black;
   static Color white = Colors.white;
   static Color darkGrey = Colors.grey.shade900;
+  static Color grey = Colors.grey;
   static Color yellow = Colors.yellow;
   static Color transparent = Colors.transparent;
 }

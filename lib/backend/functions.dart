@@ -4,11 +4,17 @@ import 'package:news_app/components/search_bar.dart';
 import 'package:news_app/utils/key.dart';
 
 Future<List> fetchNews() async {
+  String query = CustomSearchBar.searchController.text;
+  if (query == '') {
+    query = 'news';
+  }
   final response = await http.get(
     Uri.parse(
-        'https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=100&apiKey=9f869f5f18da43f0bb434a057fecf2d2${ApiKey.key}&q=${CustomSearchBar.searchController.text}'),
+        "https://newsapi.org/v2/everything?q=$query&apiKey=${ApiKey.key}"),
   );
+
   Map result = jsonDecode(response.body);
-  // print('data fetched');
-  return result['articles'];
+  // print('data fetched: ' + (result['articles']).toString());
+
+  return (result['articles']);
 }

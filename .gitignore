@@ -10,6 +10,9 @@
 .svn/
 migrate_working_dir/
 
+# Ignoring a Dart file in the lib directory
+lib/utils/key.dart
+
 # IntelliJ related
 *.iml
 *.ipr

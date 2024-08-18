@@ -21,13 +21,17 @@ class NewsBox extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
+            FocusScope.of(context).unfocus();
             showMyBottomSheet(context, title, description, imageUrl, url);
           },
           child: Container(
             padding: const EdgeInsets.all(20),
             margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
             width: screenWidth,
-            color: AppColors.black,
+            decoration: BoxDecoration(
+              color: AppColors.darkGrey,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Row(
               children: [
                 CachedNetworkImage(

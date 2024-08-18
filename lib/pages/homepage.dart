@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: AppColors.grey,
       appBar: const CustomAppBar(),
       body: Column(
         children: [
@@ -40,8 +41,8 @@ class _HomePageState extends State<HomePage> {
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
                           return NewsBox(
-                            imageUrl:
-                                snapshot.data![index]['urlToImage'] ?? Constants.defaultImageUrl,
+                            imageUrl: snapshot.data![index]['urlToImage'] ??
+                                Constants.defaultImageUrl,
                             title: snapshot.data![index]['title'],
                             time: snapshot.data![index]['publishedAt'],
                             description:
@@ -52,8 +53,14 @@ class _HomePageState extends State<HomePage> {
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   } else {
-                    return CircularProgressIndicator(
-                      color: AppColors.primary,
+                    return Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: CircularProgressIndicator(
+                          color: AppColors.primary,
+                        ),
+                      ),
                     );
                   }
                 }),
