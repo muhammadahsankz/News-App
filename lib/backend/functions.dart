@@ -12,9 +12,7 @@ Future<List> fetchNews() async {
     Uri.parse(
         "https://newsapi.org/v2/everything?q=$query&apiKey=${ApiKey.key}"),
   );
-
   Map result = jsonDecode(response.body);
-  // print('data fetched: ' + (result['articles']).toString());
 
   return (result['articles']);
 }

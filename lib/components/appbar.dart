@@ -11,6 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       actions: const [],
       backgroundColor: AppColors.black,
       elevation: 0,
@@ -19,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BoldText(text: 'News', size: 20, color: AppColors.primary),
+            BoldText(text: 'News', size: 20, color: AppColors.yellow),
             ModifiedText(color: AppColors.lightWhite, size: 20, text: 'App')
           ],
         ),

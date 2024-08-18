@@ -35,11 +35,12 @@ void showMyBottomSheet(
 }
 
 Future<void> _launchUrl(String url) async {
-  final Uri uri = Uri.parse(url);
-  if (await canLaunchUrl(uri)) {
-    await launchUrl(uri);
-  } else {
-    throw 'Could not launch $uri';
+  try {
+    await launchUrl(
+      Uri.parse(url),
+    );
+  } catch (error) {
+    print(error.toString());
   }
 }
 
