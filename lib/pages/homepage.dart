@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/backend/functions.dart';
+import 'package:news_app/components/appbar.dart';
+import 'package:news_app/components/news_box.dart';
+import 'package:news_app/components/search_bar.dart';
+import 'package:news_app/utils/colors.dart';
+import 'package:news_app/utils/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,6 +23,43 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    var screenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: const CustomAppBar(),
+      body: Column(
+        children: [
+          const CustomSearchBar(),
+          Expanded(
+              child: SizedBox(
+            width: screenWidth,
+            child: FutureBuilder<List>(
+                future: fetchNews(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return NewsBox(
+                            imageUrl:
+                                snapshot.data![index]['urlToImage'] ?? Constants.defaultImageUrl,
+                            title: snapshot.data![index]['title'],
+                            time: snapshot.data![index]['publishedAt'],
+                            description:
+                                snapshot.data![index]['description'].toString(),
+                            url: snapshot.data![index]['url'],
+                          );
+                        });
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  } else {
+                    return CircularProgressIndicator(
+                      color: AppColors.primary,
+                    );
+                  }
+                }),
+          ))
+        ],
+      ),
+    );
   }
 }
